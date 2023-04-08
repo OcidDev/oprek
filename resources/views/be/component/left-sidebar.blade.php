@@ -69,7 +69,16 @@
                                 </ul>
                             </div>
                         </li>
-
+                        <li>
+                            <a href="{{ route('category.index') }}"><i data-feather="airplay"></i>
+                                <span> Category </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('product.index') }}"><i data-feather="airplay"></i>
+                                <span> Product </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <!-- End Sidebar -->

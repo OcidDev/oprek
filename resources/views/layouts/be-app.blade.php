@@ -74,8 +74,8 @@
         @stack('before-script')
 
         <!-- App js-->
+        <script src="{{ asset('/asset/dashboard/assets/js/vendor.min.js') }}"></script>
         <script src="{{ asset('/asset/dashboard/assets/js/app.min.js') }}"></script>
-
         @stack('after-script')
 
     </body>
