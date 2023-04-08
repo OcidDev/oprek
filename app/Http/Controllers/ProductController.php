@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,7 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('categories');
+        $products = Product::with('categories')->get();
+        // dd($products);
         return view('be.pages.product.index',compact('products'));
     }
 
@@ -25,7 +27,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('be.pages.product.create',compact('categories'));
     }
 
     /**
@@ -36,7 +39,19 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'categories_id' => 'required',
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'price' => 'required|integer',
+        ],[
+            'categories_id' => 'Harus di isi',
+            'name' => 'Harus di isi',
+            'description' => 'Harus di isi',
+            'price' => 'Harus di isi|Harus berformat nomor',
+        ]);
+        Product::create($validated);
+        return redirect('product');
     }
 
     /**
@@ -58,7 +73,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories = Category::all();
+        $item = Product::find($id);
+        return view('be.pages.product.edit',compact('categories','item'));
     }
 
     /**
@@ -70,7 +87,14 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'categories_id' => 'required',
+            'name' => 'required|string',
+            'description' => 'required|string',
+            'price' => 'required|integer',
+        ]);
+        Product::find($id)->update($validated);
+        return redirect('product');
     }
 
     /**
@@ -81,6 +105,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Product::destroy($id);
+        return redirect('product');
     }
 }

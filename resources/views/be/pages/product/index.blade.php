@@ -36,7 +36,7 @@
                                     <th scope="col">{{ $item->description }}</th>
                                     <th scope="col">{{ $item->price }}</th>
                                     <th scope="col">
-                                        <a class="btn btn-warning" href="{{ route('product.destroy', $item->id) }}"
+                                        <a class="btn btn-warning" href="{{ route('product.edit', $item->id) }}"
                                             role="button">Edit</a>
                                         <form method="post" action="{{ route('product.destroy', $item->id) }}">
                                             @method('delete')

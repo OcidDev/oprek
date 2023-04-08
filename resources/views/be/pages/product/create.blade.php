@@ -1,7 +1,7 @@
 @extends('layouts.be-app')
 
 @section('title')
-    Dashboard | Category Create
+    Dashboard | Product Create
 @endsection
 @push('before-style')
 @endpush
@@ -11,15 +11,29 @@
 
         <div class="card mt-4">
             <div class="card-body">
-                <form action="{{ route('category.store') }}" method="POST">
+                <form action="{{ route('product.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
-                        <label for="category_name" class="form-label">Category Name</label>
-                        <input type="text" class="form-control" id="category_name" name="name" required>
+                        <label for="categories_id" class="form-label">Product Name</label>
+                        <select class="form-select" aria-label="Default select example" id="categories_id"
+                            name="categories_id" required>
+                            <option disabled selected>Choose one category</option>
+                            @foreach ($categories as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="mb-3">
-                        <label for="category_description" class="form-label">Category Description</label>
-                        <input type="text" class="form-control" id="category_description" name="description" required>
+                        <label for="product_name" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id="product_name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="product_description" class="form-label">Product Description</label>
+                        <input type="text" class="form-control" id="product_description" name="description" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="product_price" class="form-label">Product Price</label>
+                        <input type="number" class="form-control" id="product_price" name="price" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
