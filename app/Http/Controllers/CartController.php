@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -13,7 +15,10 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        $carts = Cart::with('products')->get();
+        // dd($carts);
+        return view('be.pages.cart.index',compact('carts','products'));
     }
 
     /**
