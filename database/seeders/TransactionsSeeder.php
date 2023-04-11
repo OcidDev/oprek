@@ -16,9 +16,9 @@ class TransactionsSeeder extends Seeder
     public function run()
     {
         $transactions = [
-            ['products_id' => 1, 'qty' => 10, 'users_id' => 1, 'total' => 10000],
-            ['products_id' => 2, 'qty' => 10, 'users_id' => 1, 'total' => 10000],
-            ['products_id' => 3, 'qty' => 10, 'users_id' => 1, 'total' => 10000]
+            ['invoice' => 1, 'users_id' => 1, 'total' => 10000],
+            ['invoice' => 2, 'users_id' => 1, 'total' => 10000],
+            ['invoice' => 3, 'users_id' => 1, 'total' => 10000]
         ];
         DB::table('transactions')->insert($transactions);
     }

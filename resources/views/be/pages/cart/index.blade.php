@@ -14,13 +14,22 @@
                 <div class="card mt-4">
                     <div class="card-body">
                         <form action="" class="table-responsive" method="POST">
-                            <label for="seacrh_product" class="form-label">Seacrh Product</label>
-                            <input class="form-control" list="products" name="products_id" id="seacrh_product" placeholder="Type to search...">
-                            <datalist id="products">
-                            @foreach ($products as $product)
-                            <option value="{{ $product->id }}">{{ $product->name }}</option>
-                            @endforeach
-                        </datalist>
+                            <div class="mb-3">
+                                <label class="form-label" for="categories_id">Select Product</label>
+                                <select class="form-select" name="products_id" required aria-label="Default select example">
+                                    <option hidden>Open this select menu</option>
+                                    @foreach ($products as $product)
+                                        <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="qty" class="form-label">Password</label>
+                                <input type="text" id="qty" name="qty" class="form-control"
+                                    aria-labelledby="passwordHelpBlock">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add To Cart</button>
                         </form>
                     </div>
                 </div>
@@ -28,7 +37,7 @@
             <div class="col-md-6"></div>
         </div>
 
-        <div class="card mt-4">
+        <div class="card">
             <div class="card-body">
                 <div class="table-responsive mt-2">
                     <table class="table table-primary">
@@ -50,7 +59,7 @@
                                     <th scope="col">{{ $no++ }}</th>
                                     <th scope="col">{{ $item->products->name }}</th>
                                     <th scope="col">{{ $item->qty }}</th>
-                                    <th scope="col">{{ $item->qty * $item->products->price}}</th>
+                                    <th scope="col">{{ $item->qty * $item->products->price }}</th>
                                     <th scope="col">
                                         <a class="btn btn-warning" href="{{ route('category.destroy', $item->id) }}"
                                             role="button">Edit</a>
