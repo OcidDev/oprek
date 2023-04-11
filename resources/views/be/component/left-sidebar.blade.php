@@ -4,7 +4,8 @@
 
                 <!-- User box -->
                 <div class="user-box text-center">
-                    <img src="{{ asset('/asset/dashboard/assets/images/users/user-6.jpg') }}" alt="user-img" title="Mat Helme" class="rounded-circle avatar-md">
+                    <img src="{{ asset('/asset/dashboard/assets/images/users/user-6.jpg') }}" alt="user-img"
+                        title="Mat Helme" class="rounded-circle avatar-md">
                     <div class="dropdown">
                         <a href="javascript: void(0);" class="text-black dropdown-toggle h5 mt-2 mb-1 d-block"
                             data-bs-toggle="dropdown">Stanley Parker</a>
@@ -77,6 +78,11 @@
                         <li>
                             <a href="{{ route('product.index') }}"><i data-feather="airplay"></i>
                                 <span> Product </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('cart.index') }}"><i data-feather="airplay"></i>
+                                <span> Cart </span>
                             </a>
                         </li>
                     </ul>
