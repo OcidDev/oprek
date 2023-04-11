@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -18,7 +19,9 @@ class CartController extends Controller
         $products = Product::all();
         $carts = Cart::with('products')->get();
         // dd($carts);
-        return view('be.pages.cart.index',compact('carts','products'));
+        $total = Cart::join('products', 'carts.products_id', '=', 'products.id')
+            ->sum(DB::raw('carts.qty * products.price'));
+        return view('be.pages.cart.index',compact('carts','products','total'));
     }
 
     /**
@@ -39,7 +42,17 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'products_id'   => 'required',
+            'qty'           => 'required|integer'
+        ]);
+        $cek = Cart::where('products_id',$request->products_id)->first();
+        if($cek){
+            Cart::where('id',$cek->id)->update(['qty'=>$cek->qty + $request->qty]);
+        }else{
+            Cart::create($validated);
+        }
+        return redirect('cart');
     }
 
     /**
@@ -73,7 +86,11 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cart = Cart::findOrFail($id);
+        $cart -> update([
+            'qty' => $request-> qty,
+        ]);
+        return redirect('cart');
     }
 
     /**
@@ -84,6 +101,8 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleted = Cart::find($id);
+        $deleted->delete();
+        return back();
     }
 }
