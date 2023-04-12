@@ -85,6 +85,11 @@
                                 <span> Cart </span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('transaction.index') }}"><i data-feather="airplay"></i>
+                                <span> Transaction </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <!-- End Sidebar -->

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -13,7 +14,8 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        $transactions = Transaction::with('transaction_details','cashier')->get();
+        return view('be.pages.transaction.index',compact('transactions'));
     }
 
     /**
@@ -45,7 +47,8 @@ class TransactionController extends Controller
      */
     public function show($id)
     {
-        //
+        $transactions = Transaction::with('transaction_details','cashier')->where('id',$id)->get();
+        return view('be.pages.transaction.show',compact('transactions'));
     }
 
     /**
